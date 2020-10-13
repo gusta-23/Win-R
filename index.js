@@ -1,10 +1,10 @@
 const Discord = require("discord.js");
 const jimp = require("jimp")
 const bot = new Discord.Client();
-const config = require("./config.json");
+const dotenv = require("dotenv");
 const fs = require("fs");
 
-bot.login(config.token);
+bot.login(process.env.token);
 bot.commands = new Discord.Collection();
 bot.queues = new Map();
 const path = require("path");
@@ -43,9 +43,9 @@ bot.on("guildMemberAdd", async member => {
 })
 
 bot.on("message", (msg) => {
-    if (!msg.content.startsWith(config.prefix) || msg.author.bot) return;
+    if (!msg.content.startsWith(process.env.prefix) || msg.author.bot) return;
   
-    const args = msg.content.slice(config.prefix.length).split(" ");
+    const args = msg.content.slice(process.env.prefix.length).split(" ");
     const command = args.shift();
   
     try {
